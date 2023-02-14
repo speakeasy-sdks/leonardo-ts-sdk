@@ -12,11 +12,7 @@ jobs:
       speakeasy_version: latest
       openapi_doc_location: https://api-docs-nine-delta.vercel.app/cloud/openapi.json
       languages: |-
-        - go: ./go-sdk/
-        - python: ./python-sdk/
         - typescript: ./ts-sdk/
-        - java: ./java-sdk
-        - php: ./php-sdk
       mode: pr
     secrets:
       github_access_token: ${{ secrets.GITHUB_TOKEN }}
