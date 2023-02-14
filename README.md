@@ -23,6 +23,10 @@ yarn add @leonardo/sdk
 ```
 <!-- End SDK Installation -->
 
+## Authentication
+
+To get access to the API and fetch an API key please sign up for [access](https://leonardo.ai/). 
+
 ## SDK Example Usage
 <!-- Start SDK Example Usage -->
 ```typescript
