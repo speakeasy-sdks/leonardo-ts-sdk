@@ -16,6 +16,7 @@ jobs:
         - python: ./python-sdk/
         - typescript: ./ts-sdk/
         - java: ./java-sdk
+        - php: ./php-sdk
       mode: pr
     secrets:
       github_access_token: ${{ secrets.GITHUB_TOKEN }}
