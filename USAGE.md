@@ -1,7 +1,7 @@
 <!-- Start SDK Example Usage -->
 ```typescript
 import { Leonardo, withSecurity} from "@leonardo/sdk";
-import { DeleteDatasetsIdRequest, DeleteDatasetsIdResponse } from "@leonardo/sdk/src/sdk/models/operations";
+import { CreateDatasetRequest, CreateDatasetResponse } from "@leonardo/sdk/src/sdk/models/operations";
 import { AxiosError } from "axios";
 
 const sdk = new Leonardo(withSecurity(
@@ -12,13 +12,14 @@ const sdk = new Leonardo(withSecurity(
   }
 ));
     
-const req: DeleteDatasetsIdRequest = {
-  pathParams: {
-    id: "unde",
+const req: CreateDatasetRequest = {
+  request: {
+    description: "unde",
+    name: "deserunt",
   },
 };
 
-sdk.creatingDatasets.deleteDatasetsId(req).then((res: DeleteDatasetsIdResponse | AxiosError) => {
+sdk.dataset.createDataset(req).then((res: CreateDatasetResponse | AxiosError) => {
    // handle response
 });
 ```

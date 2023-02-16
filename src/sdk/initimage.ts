@@ -2,7 +2,7 @@ import * as utils from "../internal/utils";
 import * as operations from "./models/operations";
 import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
 
-export class TrainingModels {
+export class InitImage {
   _defaultClient: AxiosInstance;
   _securityClient: AxiosInstance;
   _serverURL: string;
@@ -20,20 +20,20 @@ export class TrainingModels {
   }
   
   /**
-   * deleteModelsId - Delete a Single Custom Model by ID
+   * deleteInitImageById - Delete init image
    *
-   * This endpoint will delete a specific custom model
+   * This endpoint deletes an init image
   **/
-  deleteModelsId(
-    req: operations.DeleteModelsIdRequest,
+  deleteInitImageById(
+    req: operations.DeleteInitImageByIdRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.DeleteModelsIdResponse> {
+  ): Promise<operations.DeleteInitImageByIdResponse> {
     if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.DeleteModelsIdRequest(req);
+      req = new operations.DeleteInitImageByIdRequest(req);
     }
     
     const baseURL: string = this._serverURL;
-    const url: string = utils.generateURL(baseURL, "/models/{id}", req.pathParams);
+    const url: string = utils.generateURL(baseURL, "/init-image/{id}", req.pathParams);
     
     const client: AxiosInstance = this._securityClient!;
     
@@ -48,11 +48,11 @@ export class TrainingModels {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.DeleteModelsIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        const res: operations.DeleteInitImageByIdResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.deleteModelsId200ApplicationJSONAny = httpRes?.data;
+                res.deleteInitImageById200ApplicationJSONObject = httpRes?.data;
             }
             break;
         }
@@ -63,20 +63,20 @@ export class TrainingModels {
 
   
   /**
-   * getModelsId - Get a Single Custom Model by ID
+   * getInitImageById - Get single init image
    *
-   * This endpoint gets the specific custom model
+   * This endpoint will return a single init image
   **/
-  getModelsId(
-    req: operations.GetModelsIdRequest,
+  getInitImageById(
+    req: operations.GetInitImageByIdRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.GetModelsIdResponse> {
+  ): Promise<operations.GetInitImageByIdResponse> {
     if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.GetModelsIdRequest(req);
+      req = new operations.GetInitImageByIdRequest(req);
     }
     
     const baseURL: string = this._serverURL;
-    const url: string = utils.generateURL(baseURL, "/models/{id}", req.pathParams);
+    const url: string = utils.generateURL(baseURL, "/init-image/{id}", req.pathParams);
     
     const client: AxiosInstance = this._securityClient!;
     
@@ -91,11 +91,11 @@ export class TrainingModels {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GetModelsIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        const res: operations.GetInitImageByIdResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.getModelsId200ApplicationJSONAny = httpRes?.data;
+                res.getInitImageById200ApplicationJSONObject = httpRes?.data;
             }
             break;
         }
@@ -106,20 +106,20 @@ export class TrainingModels {
 
   
   /**
-   * postModels - Train a Custom Model
+   * uploadInitImage - Upload init image
    *
-   * This endpoint will train a new custom model
+   * This endpoint returns presigned details to upload an init image to S3
   **/
-  postModels(
-    req: operations.PostModelsRequest,
+  uploadInitImage(
+    req: operations.UploadInitImageRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.PostModelsResponse> {
+  ): Promise<operations.UploadInitImageResponse> {
     if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.PostModelsRequest(req);
+      req = new operations.UploadInitImageRequest(req);
     }
     
     const baseURL: string = this._serverURL;
-    const url: string = baseURL.replace(/\/$/, "") + "/models";
+    const url: string = baseURL.replace(/\/$/, "") + "/init-image";
 
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
@@ -148,11 +148,11 @@ export class TrainingModels {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.PostModelsResponse = {statusCode: httpRes.status, contentType: contentType};
+        const res: operations.UploadInitImageResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.postModels200ApplicationJSONAny = httpRes?.data;
+                res.uploadInitImage200ApplicationJSONObject = httpRes?.data;
             }
             break;
         }

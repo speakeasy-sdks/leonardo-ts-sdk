@@ -2,7 +2,7 @@ import * as utils from "../internal/utils";
 import * as operations from "./models/operations";
 import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
 
-export class CreatingDatasets {
+export class Dataset {
   _defaultClient: AxiosInstance;
   _securityClient: AxiosInstance;
   _serverURL: string;
@@ -20,102 +20,16 @@ export class CreatingDatasets {
   }
   
   /**
-   * deleteDatasetsId - Delete a Single Dataset by ID
-   *
-   * This endpoint deletes the specific dataset
-  **/
-  deleteDatasetsId(
-    req: operations.DeleteDatasetsIdRequest,
-    config?: AxiosRequestConfig
-  ): Promise<operations.DeleteDatasetsIdResponse> {
-    if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.DeleteDatasetsIdRequest(req);
-    }
-    
-    const baseURL: string = this._serverURL;
-    const url: string = utils.generateURL(baseURL, "/datasets/{id}", req.pathParams);
-    
-    const client: AxiosInstance = this._securityClient!;
-    
-    
-    const r = client.request({
-      url: url,
-      method: "delete",
-      ...config,
-    });
-    
-    return r.then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
-
-        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.DeleteDatasetsIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (true) {
-          case httpRes?.status == 200:
-            if (utils.matchContentType(contentType, `application/json`)) {
-                res.deleteDatasetsId200ApplicationJSONAny = httpRes?.data;
-            }
-            break;
-        }
-
-        return res;
-      })
-  }
-
-  
-  /**
-   * getDatasetsId - Get a Single Dataset by ID
-   *
-   * This endpoint gets the specific dataset
-  **/
-  getDatasetsId(
-    req: operations.GetDatasetsIdRequest,
-    config?: AxiosRequestConfig
-  ): Promise<operations.GetDatasetsIdResponse> {
-    if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.GetDatasetsIdRequest(req);
-    }
-    
-    const baseURL: string = this._serverURL;
-    const url: string = utils.generateURL(baseURL, "/datasets/{id}", req.pathParams);
-    
-    const client: AxiosInstance = this._securityClient!;
-    
-    
-    const r = client.request({
-      url: url,
-      method: "get",
-      ...config,
-    });
-    
-    return r.then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
-
-        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GetDatasetsIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (true) {
-          case httpRes?.status == 200:
-            if (utils.matchContentType(contentType, `application/json`)) {
-                res.getDatasetsId200ApplicationJSONAny = httpRes?.data;
-            }
-            break;
-        }
-
-        return res;
-      })
-  }
-
-  
-  /**
-   * postDatasets - Create a Dataset
+   * createDataset - Create a Dataset
    *
    * This endpoint creates a new dataset
   **/
-  postDatasets(
-    req: operations.PostDatasetsRequest,
+  createDataset(
+    req: operations.CreateDatasetRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.PostDatasetsResponse> {
+  ): Promise<operations.CreateDatasetResponse> {
     if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.PostDatasetsRequest(req);
+      req = new operations.CreateDatasetRequest(req);
     }
     
     const baseURL: string = this._serverURL;
@@ -148,11 +62,11 @@ export class CreatingDatasets {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.PostDatasetsResponse = {statusCode: httpRes.status, contentType: contentType};
+        const res: operations.CreateDatasetResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.postDatasets200ApplicationJSONAny = httpRes?.data;
+                res.createDataset200ApplicationJSONObject = httpRes?.data;
             }
             break;
         }
@@ -163,16 +77,102 @@ export class CreatingDatasets {
 
   
   /**
-   * postDatasetsDatasetIdUpload - Upload dataset image
+   * deleteDatasetById - Delete a Single Dataset by ID
+   *
+   * This endpoint deletes the specific dataset
+  **/
+  deleteDatasetById(
+    req: operations.DeleteDatasetByIdRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.DeleteDatasetByIdResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.DeleteDatasetByIdRequest(req);
+    }
+    
+    const baseURL: string = this._serverURL;
+    const url: string = utils.generateURL(baseURL, "/datasets/{id}", req.pathParams);
+    
+    const client: AxiosInstance = this._securityClient!;
+    
+    
+    const r = client.request({
+      url: url,
+      method: "delete",
+      ...config,
+    });
+    
+    return r.then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        const res: operations.DeleteDatasetByIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.matchContentType(contentType, `application/json`)) {
+                res.deleteDatasetById200ApplicationJSONObject = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+  }
+
+  
+  /**
+   * getDatasetById - Get a Single Dataset by ID
+   *
+   * This endpoint gets the specific dataset
+  **/
+  getDatasetById(
+    req: operations.GetDatasetByIdRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.GetDatasetByIdResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.GetDatasetByIdRequest(req);
+    }
+    
+    const baseURL: string = this._serverURL;
+    const url: string = utils.generateURL(baseURL, "/datasets/{id}", req.pathParams);
+    
+    const client: AxiosInstance = this._securityClient!;
+    
+    
+    const r = client.request({
+      url: url,
+      method: "get",
+      ...config,
+    });
+    
+    return r.then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        const res: operations.GetDatasetByIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.matchContentType(contentType, `application/json`)) {
+                res.getDatasetById200ApplicationJSONObject = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+  }
+
+  
+  /**
+   * uploadDatasetImage - Upload dataset image
    *
    * This endpoint returns presigned details to upload a dataset image to S3
   **/
-  postDatasetsDatasetIdUpload(
-    req: operations.PostDatasetsDatasetIdUploadRequest,
+  uploadDatasetImage(
+    req: operations.UploadDatasetImageRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.PostDatasetsDatasetIdUploadResponse> {
+  ): Promise<operations.UploadDatasetImageResponse> {
     if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.PostDatasetsDatasetIdUploadRequest(req);
+      req = new operations.UploadDatasetImageRequest(req);
     }
     
     const baseURL: string = this._serverURL;
@@ -205,11 +205,11 @@ export class CreatingDatasets {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.PostDatasetsDatasetIdUploadResponse = {statusCode: httpRes.status, contentType: contentType};
+        const res: operations.UploadDatasetImageResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.postDatasetsDatasetIdUpload200ApplicationJSONAny = httpRes?.data;
+                res.uploadDatasetImage200ApplicationJSONObject = httpRes?.data;
             }
             break;
         }
@@ -220,16 +220,16 @@ export class CreatingDatasets {
 
   
   /**
-   * postDatasetsDatasetIdUploadGen - Upload a Single Generated Image to a Dataset
+   * uploadDatasetImageFromGen - Upload a Single Generated Image to a Dataset
    *
    * This endpoint will upload a previously generated image to the dataset
   **/
-  postDatasetsDatasetIdUploadGen(
-    req: operations.PostDatasetsDatasetIdUploadGenRequest,
+  uploadDatasetImageFromGen(
+    req: operations.UploadDatasetImageFromGenRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.PostDatasetsDatasetIdUploadGenResponse> {
+  ): Promise<operations.UploadDatasetImageFromGenResponse> {
     if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.PostDatasetsDatasetIdUploadGenRequest(req);
+      req = new operations.UploadDatasetImageFromGenRequest(req);
     }
     
     const baseURL: string = this._serverURL;
@@ -262,11 +262,11 @@ export class CreatingDatasets {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.PostDatasetsDatasetIdUploadGenResponse = {statusCode: httpRes.status, contentType: contentType};
+        const res: operations.UploadDatasetImageFromGenResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.postDatasetsDatasetIdUploadGen200ApplicationJSONAny = httpRes?.data;
+                res.uploadDatasetImageFromGen200ApplicationJSONObject = httpRes?.data;
             }
             break;
         }

@@ -1,7 +1,8 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import * as shared from "../shared";
 
 
-export class PostModelsRequestBody extends SpeakeasyBase {
+export class CreateModelRequestBody extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=datasetId" })
   datasetId: string;
 
@@ -12,7 +13,7 @@ export class PostModelsRequestBody extends SpeakeasyBase {
   instancePrompt: string;
 
   @SpeakeasyMetadata({ data: "json, name=modelType" })
-  modelType?: any;
+  modelType?: shared.CustomModelTypeEnum;
 
   @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
@@ -24,18 +25,28 @@ export class PostModelsRequestBody extends SpeakeasyBase {
   resolution?: number;
 
   @SpeakeasyMetadata({ data: "json, name=sd_Version" })
-  sdVersion?: any;
+  sdVersion?: shared.SdVersionsEnum;
 
   @SpeakeasyMetadata({ data: "json, name=strength" })
-  strength?: any;
+  strength?: shared.StrengthEnum;
 }
 
-export class PostModelsRequest extends SpeakeasyBase {
+export class CreateModelRequest extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "request, media_type=application/json" })
-  request: PostModelsRequestBody;
+  request: CreateModelRequestBody;
 }
 
-export class PostModelsResponse extends SpeakeasyBase {
+export class CreateModel200ApplicationJSONSDTrainingOutput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=customModelId" })
+  customModelId?: string;
+}
+
+export class CreateModel200ApplicationJSON extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=sdTrainingJob" })
+  sdTrainingJob?: CreateModel200ApplicationJSONSDTrainingOutput;
+}
+
+export class CreateModelResponse extends SpeakeasyBase {
   @SpeakeasyMetadata()
   contentType: string;
 
@@ -43,5 +54,5 @@ export class PostModelsResponse extends SpeakeasyBase {
   statusCode: number;
 
   @SpeakeasyMetadata()
-  postModels200ApplicationJSONAny?: any;
+  createModel200ApplicationJSONObject?: CreateModel200ApplicationJSON;
 }
