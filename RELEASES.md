@@ -35,3 +35,9 @@ Based on:
 Based on:
 - OpenAPI Doc v1.0.0 https://api-docs-nine-delta.vercel.app/cloud/openapi.json
 - Speakeasy CLI 1.4.8 https://github.com/speakeasy-api/speakeasy
+
+## Version 1.3.0
+### Changes
+Based on:
+- OpenAPI Doc v1.0.0 https://api-docs-nine-delta.vercel.app/cloud/openapi.json
+- Speakeasy CLI 1.5.0 https://github.com/speakeasy-api/speakeasy
