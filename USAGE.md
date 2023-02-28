@@ -1,24 +1,29 @@
 <!-- Start SDK Example Usage -->
 ```typescript
-import { Leonardo, withSecurity} from "@leonardo/sdk";
-import { DeleteDatasetsIdRequest, DeleteDatasetsIdResponse } from "@leonardo/sdk/src/sdk/models/operations";
-import { AxiosError } from "axios";
+import {
+  CreateDatasetRequest,
+  CreateDatasetResponse 
+} from "@leonardo/sdk/dist/sdk/models/operations";
 
-const sdk = new Leonardo(withSecurity(
+import { AxiosError } from "axios";
+import { Leonardo } from "@leonardo/sdk";
+
+const sdk = new Leonardo({
   security: {
     bearerAuth: {
       authorization: "Bearer YOUR_BEARER_TOKEN_HERE",
     },
   }
-));
+});
     
-const req: DeleteDatasetsIdRequest = {
-  pathParams: {
-    id: "unde",
+const req: CreateDatasetRequest = {
+  request: {
+    description: "unde",
+    name: "deserunt",
   },
 };
 
-sdk.creatingDatasets.deleteDatasetsId(req).then((res: DeleteDatasetsIdResponse | AxiosError) => {
+sdk.dataset.createDataset(req).then((res: CreateDatasetResponse | AxiosError) => {
    // handle response
 });
 ```

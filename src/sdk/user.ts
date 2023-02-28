@@ -1,8 +1,9 @@
 import * as utils from "../internal/utils";
 import * as operations from "./models/operations";
 import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import { plainToInstance } from "class-transformer";
 
-export class UserInformation {
+export class User {
   _defaultClient: AxiosInstance;
   _securityClient: AxiosInstance;
   _serverURL: string;
@@ -20,13 +21,13 @@ export class UserInformation {
   }
   
   /**
-   * getMe - Get user information
+   * getUserSelf - Get user information
    *
    * This endpoint will return your user information, including your user ID.
   **/
-  getMe(
+  getUserSelf(
     config?: AxiosRequestConfig
-  ): Promise<operations.GetMeResponse> {
+  ): Promise<operations.GetUserSelfResponse> {
     const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/me";
     
@@ -43,11 +44,15 @@ export class UserInformation {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GetMeResponse = {statusCode: httpRes.status, contentType: contentType};
+        const res: operations.GetUserSelfResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.getMe200ApplicationJSONAny = httpRes?.data;
+              res.getUserSelf200ApplicationJSONObject = plainToInstance(
+                operations.GetUserSelf200ApplicationJSON,
+                httpRes?.data as operations.GetUserSelf200ApplicationJSON,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }

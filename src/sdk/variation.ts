@@ -1,8 +1,9 @@
 import * as utils from "../internal/utils";
 import * as operations from "./models/operations";
 import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import { plainToInstance } from "class-transformer";
 
-export class ImageVariations {
+export class Variation {
   _defaultClient: AxiosInstance;
   _securityClient: AxiosInstance;
   _serverURL: string;
@@ -20,59 +21,16 @@ export class ImageVariations {
   }
   
   /**
-   * getVariationsId - Get variation by ID
-   *
-   * This endpoint will get the variation by ID
-  **/
-  getVariationsId(
-    req: operations.GetVariationsIdRequest,
-    config?: AxiosRequestConfig
-  ): Promise<operations.GetVariationsIdResponse> {
-    if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.GetVariationsIdRequest(req);
-    }
-    
-    const baseURL: string = this._serverURL;
-    const url: string = utils.generateURL(baseURL, "/variations/{id}", req.pathParams);
-    
-    const client: AxiosInstance = this._securityClient!;
-    
-    
-    const r = client.request({
-      url: url,
-      method: "get",
-      ...config,
-    });
-    
-    return r.then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
-
-        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GetVariationsIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (true) {
-          case httpRes?.status == 200:
-            if (utils.matchContentType(contentType, `application/json`)) {
-                res.getVariationsId200ApplicationJSONAny = httpRes?.data;
-            }
-            break;
-        }
-
-        return res;
-      })
-  }
-
-  
-  /**
-   * postVariationsUpscale - Create upscale
+   * createVariationUpscale - Create upscale
    *
    * This endpoint will create an upscale for the provided image ID
   **/
-  postVariationsUpscale(
-    req: operations.PostVariationsUpscaleRequest,
+  createVariationUpscale(
+    req: operations.CreateVariationUpscaleRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.PostVariationsUpscaleResponse> {
+  ): Promise<operations.CreateVariationUpscaleResponse> {
     if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.PostVariationsUpscaleRequest(req);
+      req = new operations.CreateVariationUpscaleRequest(req);
     }
     
     const baseURL: string = this._serverURL;
@@ -104,11 +62,62 @@ export class ImageVariations {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.PostVariationsUpscaleResponse = {statusCode: httpRes.status, contentType: contentType};
+        const res: operations.CreateVariationUpscaleResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.postVariationsUpscale200ApplicationJSONAny = httpRes?.data;
+              res.createVariationUpscale200ApplicationJSONObject = plainToInstance(
+                operations.CreateVariationUpscale200ApplicationJSON,
+                httpRes?.data as operations.CreateVariationUpscale200ApplicationJSON,
+                { excludeExtraneousValues: true }
+              );
+            }
+            break;
+        }
+
+        return res;
+      })
+  }
+
+  
+  /**
+   * getVariationById - Get variation by ID
+   *
+   * This endpoint will get the variation by ID
+  **/
+  getVariationById(
+    req: operations.GetVariationByIdRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.GetVariationByIdResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.GetVariationByIdRequest(req);
+    }
+    
+    const baseURL: string = this._serverURL;
+    const url: string = utils.generateURL(baseURL, "/variations/{id}", req.pathParams);
+    
+    const client: AxiosInstance = this._securityClient!;
+    
+    
+    const r = client.request({
+      url: url,
+      method: "get",
+      ...config,
+    });
+    
+    return r.then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        const res: operations.GetVariationByIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.matchContentType(contentType, `application/json`)) {
+              res.getVariationById200ApplicationJSONObject = plainToInstance(
+                operations.GetVariationById200ApplicationJSON,
+                httpRes?.data as operations.GetVariationById200ApplicationJSON,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
